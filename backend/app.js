@@ -6,4 +6,16 @@ const app = express();
 dotenv.config({ path: './config/config.env' });
 
 
+//for connecting backend to frontend
+app.use(
+    cors({
+    origin: [process.env.FRONTEND_URL],
+    methods: ["POST"],  //POST is to send the data
+    credentials: true,
+})
+);
+
+app.use(express.json());  //express.json = to convert string to object
+app.use(express.urlencoded({extended: true}));
+
 export default app;
