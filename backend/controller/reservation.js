@@ -8,8 +8,7 @@ if(firstName || lastname || email || phone || date || time ){
 }
 try{
     await Reservation.create(firstName, lastname,email,phone,date,time);
-    res.status(200),
-    json({
+    res.status(200).json({
         success: true,
         message: "Reservation Sent Successfully!",
     });
@@ -20,5 +19,6 @@ if(error.name === "ValidationError"){
     );
     return next(new ErrorHandler(validationErrors.json(" , "),400));
 }
+return next(error);
 }
 };
