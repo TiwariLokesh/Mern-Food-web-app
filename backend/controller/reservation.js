@@ -14,6 +14,11 @@ try{
         message: "Reservation Sent Successfully!",
     });
 }catch (error){
-
+if(error.name === "ValidationError"){
+    const validationErrors = Object.values(error.errors).map(
+        (err) => err.message
+    );
+    return next(new ErrorHandler(validationErrors.json(" , "),400));
+}
 }
 };
